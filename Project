@@ -1,1 +1,145 @@
+import pandas as pd
+import numpy as np
+
+data = pd.read_csv("Health_Systems.csv", sep = ",")
+
+data
+
+not_null_values = data["Country_Region"].count()
+null_values = data["Country_Region"].isnull().count()
+
+average_other_values = round((not_null_values/null_values)*100)
+average_null_values = 100 - average_other_values
+
+print("\tCountry_Region\nOthers : ", average_other_values, "%")
+print("Null Values : ", average_null_values, "%")
+
+not_null_values = data["Province_State"].count()
+null_values = data["Province_State"].isnull().count()
+average_other_values = round((not_null_values/null_values)*100)
+average_null_values = 100-average_other_values
+
+print("\tProvince_State\nOthers : ", average_other_values, "%")
+print("Null Values : ", average_null_values, "%")
+
+total_countries = data["World_Bank_Name"].count()
+print("\tTotal Countries under World Bank\nTotal : ", total_countries)
+
+# drop rows with all null values
+data = data.dropna(thresh = 11)
+data.reset_index(drop=True, inplace=True)
+
+data
+
+def Normalization(columnName):
+    avg = data[columnName].astype("float").mean(axis=0)
+    data[columnName].replace(np.nan, avg, inplace=True)
+
+# Data Normalization
+Normalization("External_health_exp_pct_2016")
+Normalization("Physicians_per_1000_2009-18")
+Normalization("Nurse_midwife_per_1000_2009-18")
+Normalization("Specialist_surgical_per_1000_2008-18")
+Normalization("Completeness_of_birth_reg_2009-18")
+Normalization("Completeness_of_death_reg_2008-16")
+
+
+missingValues = data.isnull().count()
+
+# There is no missing value now
+missingValues
+
+import matplotlib.pyplot as plt
+
+plt.hist(data["Health_exp_pct_GDP_2016"])
+plt.xlabel("GDP-2016")
+plt.ylabel("Count")
+plt.title("Health_exp_pct_GDP_2016")
+
+
+plt.hist(data["Health_exp_public_pct_2016"])
+plt.xlabel("Public PCT 2016")
+plt.ylabel("Count")
+plt.title("Health_exp_public_pct_2016")
+
+
+plt.hist(data["Health_exp_out_of_pocket_pct_2016"])
+plt.xlabel("Pocket PCT 2016")
+plt.ylabel("Count")
+plt.title("Health_exp_out_of_pocket_pct_2016")
+
+
+plt.hist(data["Health_exp_per_capita_USD_2016"])
+plt.xlabel("Capita-2016")
+plt.ylabel("Count")
+plt.title("Health_exp_per_capita_USD_2016")
+
+
+plt.hist(data["per_capita_exp_PPP_2016"])
+plt.xlabel("PPP-2016")
+plt.ylabel("Count")
+plt.title("per_capita_exp_PPP_2016")
+
+
+plt.hist(data["External_health_exp_pct_2016"])
+plt.xlabel("External Health PCT 2016")
+plt.ylabel("Count")
+plt.title("External_health_exp_pct_2016")
+
+
+plt.hist(data["Physicians_per_1000_2009-18"])
+plt.xlabel("Physicians 2009-18")
+plt.ylabel("Count")
+plt.title("Physicians_per_1000_2009-18")
+
+
+plt.hist(data["Nurse_midwife_per_1000_2009-18"])
+plt.xlabel("Nurses 2009-18")
+plt.ylabel("Count")
+plt.title("Nurse_midwife_per_1000_2009-18")
+
+
+plt.hist(data["Specialist_surgical_per_1000_2008-18"])
+plt.xlabel("Specialist Surgical 2008-2018")
+plt.ylabel("Count")
+plt.title("Specialist_surgical_per_1000_2008-18")
+
+
+plt.hist(data["Completeness_of_death_reg_2008-16"])
+plt.xlabel("Death 2008-16")
+plt.ylabel("Count")
+plt.title("Completeness_of_death_reg_2008-16")
+
+
+
+plt.hist(data["Completeness_of_birth_reg_2009-18"])
+plt.xlabel("Birth 2009-18")
+plt.ylabel("Count")
+plt.title("Completeness_of_birth_reg_2009-18")
+
+
+data.plot(figsize = (15, 15))
+
+
+import seaborn as sns
+f,ax = plt.subplots(figsize=(18,18))
+sns.heatmap(data.corr(),annot=True,linewidth=.5,fmt='.1f',ax=ax)
+plt.show()
+
+
+data.plot(kind='scatter',x="Health_exp_per_capita_USD_2016", y="per_capita_exp_PPP_2016",figsize=(10,10))
+
+
+data1 = data.loc[:,['Health_exp_pct_GDP_2016','Health_exp_out_of_pocket_pct_2016','Health_exp_per_capita_USD_2016']]
+data1.plot(figsize = (15, 15))
+
+
+data1.plot(kind='hist',y='Health_exp_per_capita_USD_2016',bins=50,range=(0,250),figsize=(10,10))
+
+
+fig,axes = plt.subplots(nrows=2,ncols=1)
+data1.plot(kind='hist',y='Health_exp_per_capita_USD_2016',bins=50,range=(0,250),ax=axes[0])
+data1.plot(kind='hist',y='Health_exp_per_capita_USD_2016',bins=50,range=(0,250),ax=axes[1],cumulative=True)
+plt.savefig('graph.png')
+plt
 
