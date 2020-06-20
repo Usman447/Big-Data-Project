@@ -20,7 +20,7 @@ average_other_values = round((not_null_values/null_values)*100)
 average_null_values = 100-average_other_values
 
 print("\tProvince_State\nOthers : ", average_other_values, "%")
-print("Null Values : ", average_null_values, "%")
+print("Null Values : ", average_null_values, "%") 
 
 total_countries = data["World_Bank_Name"].count()
 print("\tTotal Countries under World Bank\nTotal : ", total_countries)
@@ -141,5 +141,5 @@ fig,axes = plt.subplots(nrows=2,ncols=1)
 data1.plot(kind='hist',y='Health_exp_per_capita_USD_2016',bins=50,range=(0,250),ax=axes[0])
 data1.plot(kind='hist',y='Health_exp_per_capita_USD_2016',bins=50,range=(0,250),ax=axes[1],cumulative=True)
 plt.savefig('graph.png')
-plt
+plt.show()
 
