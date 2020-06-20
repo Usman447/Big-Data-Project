@@ -3,13 +3,7 @@ import numpy as np
     
 data = pd.read_csv("Health_Systems.csv", sep = ",")
 
-print(data.shape)
-
-header = ["Health_exp_pct_GDP_2016", "Health_exp_public_pct_2016",
-          "Health_exp_out_of_pocket_pct_2016", "Health_exp_per_capita_USD_2016",
-          "per_capita_exp_PPP_2016", "External_health_exp_pct_2016", "Physicians_per_1000_2009-18", 
-          "Nurse_midwife_per_1000_2009-18", "Specialist_surgical_per_1000_2008-18", "Completeness_of_birth_reg_2009-18",
-          "Completeness_of_death_reg_2008-16"]
+data
 
 not_null_values = data["Country_Region"].count()
 null_values = data["Country_Region"].isnull().count()
@@ -58,94 +52,79 @@ missingValues
 import matplotlib.pyplot as plt
 
 plt.hist(data["Health_exp_pct_GDP_2016"])
-plt.xlabel("GDP-2016")
+plt.xlablel("GDP-2016")
 plt.ylabel("Count")
 plt.title("Health_exp_pct_GDP_2016")
 
-
 plt.hist(data["Health_exp_public_pct_2016"])
-plt.xlabel("Public PCT 2016")
-plt.ylabel("Count")
+plt.xlabel("Public PCT 2016)
+plt ylabel("Count")
 plt.title("Health_exp_public_pct_2016")
-
 
 plt.hist(data["Health_exp_out_of_pocket_pct_2016"])
 plt.xlabel("Pocket PCT 2016")
 plt.ylabel("Count")
 plt.title("Health_exp_out_of_pocket_pct_2016")
 
-
 plt.hist(data["Health_exp_per_capita_USD_2016"])
 plt.xlabel("Capita-2016")
 plt.ylabel("Count")
 plt.title("Health_exp_per_capita_USD_2016")
-
 
 plt.hist(data["per_capita_exp_PPP_2016"])
 plt.xlabel("PPP-2016")
 plt.ylabel("Count")
 plt.title("per_capita_exp_PPP_2016")
 
-
 plt.hist(data["External_health_exp_pct_2016"])
 plt.xlabel("External Health PCT 2016")
 plt.ylabel("Count")
 plt.title("External_health_exp_pct_2016")
-
 
 plt.hist(data["Physicians_per_1000_2009-18"])
 plt.xlabel("Physicians 2009-18")
 plt.ylabel("Count")
 plt.title("Physicians_per_1000_2009-18")
 
-
 plt.hist(data["Nurse_midwife_per_1000_2009-18"])
 plt.xlabel("Nurses 2009-18")
 plt.ylabel("Count")
 plt.title("Nurse_midwife_per_1000_2009-18")
 
-
 plt.hist(data["Specialist_surgical_per_1000_2008-18"])
-plt.xlabel("Specialist Surgical 2008-2018")
+plt.xlabel("Specialist Surgical 2008-18")
 plt.ylabel("Count")
 plt.title("Specialist_surgical_per_1000_2008-18")
-
 
 plt.hist(data["Completeness_of_death_reg_2008-16"])
 plt.xlabel("Death 2008-16")
 plt.ylabel("Count")
 plt.title("Completeness_of_death_reg_2008-16")
 
-
-
 plt.hist(data["Completeness_of_birth_reg_2009-18"])
-plt.xlabel("Birth 2009-18")
+plt.xlabel("Birth 2009-16")
 plt.ylabel("Count")
 plt.title("Completeness_of_birth_reg_2009-18")
 
-
-data.plot(figsize = (15, 15))
-
+data.plot(figsize=(15,15))
 
 import seaborn as sns
-f,ax = plt.subplots(figsize=(18,18))
+f,ax=plt.subplots(figsize=(18,18))
 sns.heatmap(data.corr(),annot=True,linewidth=.5,fmt='.1f',ax=ax)
 plt.show()
 
-
-data.plot(kind='scatter',x="Health_exp_per_capita_USD_2016", y="per_capita_exp_PPP_2016",figsize=(10,10))
-
+data.plot(kind='scatter',x="Health_exp_per_capta_USD_2016",y="per_capita_exp_PPP_2016",figsize=(10,10))
 
 data1 = data.loc[:,['Health_exp_pct_GDP_2016','Health_exp_out_of_pocket_pct_2016','Health_exp_per_capita_USD_2016']]
 data1.plot(figsize = (15, 15))
 
-
 data1.plot(kind='hist',y='Health_exp_per_capita_USD_2016',bins=50,range=(0,250),figsize=(10,10))
 
+fig,axes=plt.subplots(nrows=2,cols=1)
 
-fig,axes = plt.subplots(nrows=2,ncols=1)
 data1.plot(kind='hist',y='Health_exp_per_capita_USD_2016',bins=50,range=(0,250),ax=axes[0])
 data1.plot(kind='hist',y='Health_exp_per_capita_USD_2016',bins=50,range=(0,250),ax=axes[1],cumulative=True)
 plt.savefig('graph.png')
 plt.show()
+
 
