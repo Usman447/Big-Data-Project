@@ -1,9 +1,15 @@
 import pandas as pd
 import numpy as np
-
+    
 data = pd.read_csv("Health_Systems.csv", sep = ",")
 
-data
+print(data.shape)
+
+header = ["Health_exp_pct_GDP_2016", "Health_exp_public_pct_2016",
+          "Health_exp_out_of_pocket_pct_2016", "Health_exp_per_capita_USD_2016",
+          "per_capita_exp_PPP_2016", "External_health_exp_pct_2016", "Physicians_per_1000_2009-18", 
+          "Nurse_midwife_per_1000_2009-18", "Specialist_surgical_per_1000_2008-18", "Completeness_of_birth_reg_2009-18",
+          "Completeness_of_death_reg_2008-16"]
 
 not_null_values = data["Country_Region"].count()
 null_values = data["Country_Region"].isnull().count()
