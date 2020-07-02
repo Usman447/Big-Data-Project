@@ -102,7 +102,7 @@ plt.ylabel("Count")
 plt.title("Completeness_of_death_reg_2008-16")
 
 plt.hist(data["Completeness_of_birth_reg_2009-18"])
-plt.xlabel("Birth 2009-16")
+plt.xlabel("Birth 2009-18")
 plt.ylabel("Count")
 plt.title("Completeness_of_birth_reg_2009-18")
 
