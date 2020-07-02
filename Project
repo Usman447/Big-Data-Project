@@ -52,13 +52,13 @@ missingValues
 import matplotlib.pyplot as plt
 
 plt.hist(data["Health_exp_pct_GDP_2016"])
-plt.xlablel("GDP-2016")
+plt.xlabel("GDP-2016")
 plt.ylabel("Count")
 plt.title("Health_exp_pct_GDP_2016")
 
 plt.hist(data["Health_exp_public_pct_2016"])
-plt.xlabel("Public PCT 2016)
-plt ylabel("Count")
+plt.xlabel("Public PCT 2016")
+plt.ylabel("Count")
 plt.title("Health_exp_public_pct_2016")
 
 plt.hist(data["Health_exp_out_of_pocket_pct_2016"])
