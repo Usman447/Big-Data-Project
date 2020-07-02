@@ -29,7 +29,7 @@ print("\tTotal Countries under World Bank\nTotal : ", total_countries)
 data = data.dropna(thresh = 11)
 data.reset_index(drop=True, inplace=True)
 
-data.head()
+data
 
 def Normalization(columnName):
     avg = data[columnName].astype("float").mean(axis=0)
